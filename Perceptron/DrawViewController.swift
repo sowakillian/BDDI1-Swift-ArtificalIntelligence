@@ -24,6 +24,7 @@ class DrawViewController: UIViewController {
     var correctArray:[UIImage] = []
     let perceptron = Perceptron(nbInput: 60)
     var datasEntryType: String = "row"
+    @IBOutlet weak var predictionResult: UILabel!
     
     let datasetManager = DatasetManager()
     
@@ -61,9 +62,8 @@ class DrawViewController: UIViewController {
         }
     }
     
-
-    
     @IBAction func clearDataset(_ sender: Any) {
+        datasetManager.clearDataset()
         self.circlesImages.removeAll()
         self.linesImages.removeAll()
         self.correctArray.removeAll()
@@ -77,22 +77,18 @@ class DrawViewController: UIViewController {
             drawView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         }
         
-        //let touchesConverted = checkDatasType(datasEntryType: datasEntryType, entryTouches: drawView!.inputTouches)
         let touchesConverted = datasetManager.toRawDataArray(coord:drawView!.inputTouches, nbValues:60)
         
         if (circleOrLine.selectedSegmentIndex == 0) {
             self.circlesImages.append(image)
             self.correctArray = circlesImages
-            //self.dataset.append((touchesConverted, 0))
-            
             datasetManager.appendData(data:touchesConverted,expectedResponse:0)
             
             //appenddata à add ici
         } else if (circleOrLine.selectedSegmentIndex == 1) {
             self.linesImages.append(image)
             self.correctArray = linesImages
-            //self.dataset.append((touchesConverted, 1))
-            datasetManager.appendData(data:touchesConverted,expectedResponse:0)
+            datasetManager.appendData(data:touchesConverted,expectedResponse:1)
         }
         
         tableView.reloadData()
@@ -104,8 +100,10 @@ class DrawViewController: UIViewController {
         print(perceptron.predict(nbInput: touchesConverted))
         if (perceptron.predict(nbInput: touchesConverted) == 0.0) {
             print("I'm a crazy circle")
+            predictionResult.text = "Circle"
         } else {
             print("I'm a crazy line")
+            predictionResult.text = "Line"
         }
     }
     
@@ -118,17 +116,13 @@ class DrawViewController: UIViewController {
         
         switch datasEntryType {
         case "normalized":
-            print("check normalized")
             dataPrep = datasetManager.toNormalizedArray(coord:entryTouches, nbValues:60)
             
         case "standardised":
             dataPrep = datasetManager.toStandardizedArray(coord:entryTouches, nbValues:60)
-            print("check standardized")
         default:
             dataPrep = datasetManager.toRawDataArray(coord:entryTouches, nbValues:60)
         }
-        
-        print("dataPrep", dataPrep)
         
         return dataPrep
     }
@@ -160,7 +154,8 @@ extension DrawViewController:UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 600
+        return 200
     }
+
 }
 
