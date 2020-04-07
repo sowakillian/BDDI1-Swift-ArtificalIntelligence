@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Draw View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="DrawViewController" customModule="Perceptron" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdD-US-0na" customClass="AASignatureView" customModule="Perceptron" customModuleProvider="target">
+                                <rect key="frame" x="33" y="130" width="348" height="420"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="348" id="cQf-Op-weD"/>
+                                    <constraint firstAttribute="height" constant="420" id="v1w-aQ-9NV"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="144" translatesAutoresizingMaskIntoConstraints="NO" id="MLK-Vc-D5m">
+                                <rect key="frame" x="32.5" y="73" width="349" height="31"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fr2-v9-a59">
+                                        <rect key="frame" x="0.0" y="0.0" width="109" height="32"/>
+                                        <segments>
+                                            <segment title="Circle"/>
+                                            <segment title="Line"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="segmentedChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="RB3-CY-5Om"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJJ-np-dfU">
+                                        <rect key="frame" x="253" y="0.0" width="96" height="31"/>
+                                        <state key="normal" title="Clear Drawing"/>
+                                        <connections>
+                                            <action selector="clearDrawingClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mS8-Og-QMw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ewu-ZJ-7VR">
+                                <rect key="frame" x="33" y="661" width="349" height="201"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="p9X-Rv-nAf">
+                                        <rect key="frame" x="0.0" y="28" width="349" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p9X-Rv-nAf" id="hNV-HA-Dsm">
+                                            <rect key="frame" x="0.0" y="0.0" width="349" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0et-JA-ly8">
+                                <rect key="frame" x="36.5" y="568" width="341" height="76"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rbw-qC-ddo">
+                                        <rect key="frame" x="18" y="0.0" width="305" height="31"/>
+                                        <subviews>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="FxB-hZ-Z6F">
+                                                <rect key="frame" x="0.0" y="0.0" width="305" height="32"/>
+                                                <segments>
+                                                    <segment title="Row"/>
+                                                    <segment title="Normalize"/>
+                                                    <segment title="Standardised"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="datasTypeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ale-nh-ucO"/>
+                                                </connections>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="jAh-95-N8y">
+                                        <rect key="frame" x="0.0" y="46" width="341" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LOf-xd-kcS">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="Add"/>
+                                                <connections>
+                                                    <action selector="addDataset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="b99-sJ-UUf"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="htw-xd-ZPu">
+                                                <rect key="frame" x="67" y="0.0" width="94" height="30"/>
+                                                <state key="normal" title="Clear Dataset"/>
+                                                <connections>
+                                                    <action selector="clearDataset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VSd-iW-moi"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKN-S9-5SS">
+                                                <rect key="frame" x="198" y="0.0" width="34" height="30"/>
+                                                <state key="normal" title="Train"/>
+                                                <connections>
+                                                    <action selector="trainClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2t7-SN-sol"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="amI-oE-hRT">
+                                                <rect key="frame" x="269" y="0.0" width="72" height="30"/>
+                                                <state key="normal" title="Recognize"/>
+                                                <connections>
+                                                    <action selector="recongizeClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZPL-V6-EXk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xdD-US-0na" firstAttribute="top" secondItem="MLK-Vc-D5m" secondAttribute="bottom" constant="26" id="78d-fo-6ip"/>
+                            <constraint firstItem="xdD-US-0na" firstAttribute="centerX" secondItem="0et-JA-ly8" secondAttribute="centerX" id="E9r-7A-BTd"/>
+                            <constraint firstItem="MLK-Vc-D5m" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="gR9-pz-nLY"/>
+                            <constraint firstItem="MLK-Vc-D5m" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="29" id="jQk-Q0-Olr"/>
+                            <constraint firstItem="xdD-US-0na" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="poL-74-eZY"/>
+                            <constraint firstItem="0et-JA-ly8" firstAttribute="top" secondItem="xdD-US-0na" secondAttribute="bottom" constant="18" id="rIY-by-DXA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnAdd" destination="LOf-xd-kcS" id="69F-c2-R6T"/>
+                        <outlet property="btnClear" destination="EJJ-np-dfU" id="8B2-Dh-JFb"/>
+                        <outlet property="btnClearDataset" destination="htw-xd-ZPu" id="fD3-WR-y4c"/>
+                        <outlet property="btnRecognize" destination="amI-oE-hRT" id="8EM-r3-unF"/>
+                        <outlet property="circleOrLine" destination="fr2-v9-a59" id="hox-pg-qYz"/>
+                        <outlet property="datasType" destination="FxB-hZ-Z6F" id="MXo-dW-R9a"/>
+                        <outlet property="drawView" destination="xdD-US-0na" id="vRK-7m-Ggy"/>
+                        <outlet property="tableView" destination="ewu-ZJ-7VR" id="rSS-Hr-V67"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-794.20289855072474" y="79.6875"/>
+        </scene>
+    </scenes>
+</document>
