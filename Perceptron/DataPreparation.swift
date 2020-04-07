@@ -29,26 +29,19 @@ class DataPreparation {
 extension DataPreparation {
     // mean
     func calcArrayMean() -> [Double] {
-        var sumX:Double = 0
-        var sumY:Double = 0
 
-        var meanArray = [Double]()
+        var sums:[Double] = [0.0,0.0]
 
         for i in 0..<self.values.count {
-            if i % 2 == 0{
-                sumX += self.values[i]
-            }
-            else{
-                sumY += self.values[i]
-            }
+            sums[i % 2] += self.values[i]
         }
-        meanArray.append(sumX / (Double(self.values.count) / 2.0))
-        meanArray.append(sumY / ( Double(self.values.count) / 2.0))
 
+        var meanArray = sums.map{
+            $0 / (Double(self.values.count) / 2.0)
+        }
         return meanArray
     }
 
-    // standardisation
 }
 
 extension DataPreparation {
@@ -129,42 +122,26 @@ extension DataPreparation {
         var means:[Double] = self.calcArrayMean()
         var standardDeviations:[Double] = self.calcStandardDeviation(means:means)
 
-        var standardizedArray = [Double]()
-        for i in 0..<self.values.count{
-            var standardizedValue:Double = 0
-            if i % 2 == 0{
-                standardizedValue = (self.values[i] - means[0] ) / standardDeviations[0]
-            }
-            else{
-                standardizedValue = (self.values[i] - means[1] ) / standardDeviations[1]
-            }
-            standardizedArray.append(standardizedValue)
+        var standardizedArray = self.values.enumerated().map{
+            ($0.element - means[$0.offset % 2] ) / standardDeviations[$0.offset % 2]
         }
+        
         return standardizedArray
     }
 
     private func calcStandardDeviation(means:[Double]) -> [Double]{
 
-        var sumX:Double = 0
-        var sumY:Double = 0
-
+        var sums:[Double] = [0.0,0.0]
         var deviations = [Double]()
 
         for i in 0..<self.values.count {
-            if i % 2 == 0{
-                sumX += pow(self.values[i] - means[0], 2.0)
-            }
-            else{
-                sumY += pow(self.values[i] - means[1], 2.0)
-            }
+            sums[i % 2] += pow(self.values[i] - means[i % 2], 2.0)
         }
-        var xDeviation:Double  = sqrt(sumX / (Double(self.values.count) / 2.0))
-        var yDeviation:Double  = sqrt(sumY / (Double(self.values.count) / 2.0))
 
-        deviations.append(xDeviation)
-        deviations.append(yDeviation)
-
-        return deviations
+        deviations = sums.map{
+            sqrt($0 / (Double(self.values.count) / 2.0))
+        }
         
+        return deviations
     }
 }

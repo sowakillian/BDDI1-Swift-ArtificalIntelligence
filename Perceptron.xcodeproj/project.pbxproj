@@ -19,6 +19,7 @@
 		7B0B4F84243B2E160088BC0F /* AASignatureView+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0B4F82243B2E160088BC0F /* AASignatureView+Helper.swift */; };
 		7B0B4F86243B30130088BC0F /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0B4F85243B30130088BC0F /* DrawViewController.swift */; };
 		7B322DE4243C602500284629 /* DataPreparation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B322DE3243C602500284629 /* DataPreparation.swift */; };
+		7BCDA4A4243C98D000E9C4B6 /* DatasetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCDA4A3243C98D000E9C4B6 /* DatasetManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		7B0B4F82243B2E160088BC0F /* AASignatureView+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "AASignatureView+Helper.swift"; path = "../../../../../../Downloads/AASignatureView+Helper.swift"; sourceTree = "<group>"; };
 		7B0B4F85243B30130088BC0F /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
 		7B322DE3243C602500284629 /* DataPreparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPreparation.swift; sourceTree = "<group>"; };
+		7BCDA4A3243C98D000E9C4B6 /* DatasetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasetManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		7B0B4F5C243B12E20088BC0F /* Perceptron */ = {
 			isa = PBXGroup;
 			children = (
+				7BCDA4A2243C98A900E9C4B6 /* Datas */,
 				7B0B4F81243B2E160088BC0F /* AASignatureView.swift */,
 				7B0B4F82243B2E160088BC0F /* AASignatureView+Helper.swift */,
 				7B0B4F5D243B12E20088BC0F /* AppDelegate.swift */,
@@ -112,6 +115,14 @@
 				7B0B4F76243B12E40088BC0F /* Info.plist */,
 			);
 			path = PerceptronTests;
+			sourceTree = "<group>";
+		};
+		7BCDA4A2243C98A900E9C4B6 /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				7BCDA4A3243C98D000E9C4B6 /* DatasetManager.swift */,
+			);
+			path = Datas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +230,7 @@
 				7B0B4F62243B12E20088BC0F /* ViewController.swift in Sources */,
 				7B0B4F80243B132D0088BC0F /* Perceptron.swift in Sources */,
 				7B0B4F5E243B12E20088BC0F /* AppDelegate.swift in Sources */,
+				7BCDA4A4243C98D000E9C4B6 /* DatasetManager.swift in Sources */,
 				7B0B4F86243B30130088BC0F /* DrawViewController.swift in Sources */,
 				7B0B4F60243B12E20088BC0F /* SceneDelegate.swift in Sources */,
 				7B0B4F84243B2E160088BC0F /* AASignatureView+Helper.swift in Sources */,

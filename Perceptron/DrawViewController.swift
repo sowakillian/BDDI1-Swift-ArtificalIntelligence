@@ -19,12 +19,13 @@ class DrawViewController: UIViewController {
     @IBOutlet weak var drawView: AASignatureView!
     @IBOutlet weak var tableView: UITableView!
     
-    var dataset:[([Double], Double)] = []
     var circlesImages:[UIImage] = []
     var linesImages:[UIImage] = []
     var correctArray:[UIImage] = []
     let perceptron = Perceptron(nbInput: 60)
     var datasEntryType: String = "row"
+    
+    let datasetManager = DatasetManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,6 @@ class DrawViewController: UIViewController {
 
     
     @IBAction func clearDataset(_ sender: Any) {
-        self.dataset.removeAll()
         self.circlesImages.removeAll()
         self.linesImages.removeAll()
         self.correctArray.removeAll()
@@ -77,23 +77,28 @@ class DrawViewController: UIViewController {
             drawView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         }
         
-        let touchesConverted = checkDatasType(datasEntryType: datasEntryType, entryTouches: drawView!.inputTouches)
+        //let touchesConverted = checkDatasType(datasEntryType: datasEntryType, entryTouches: drawView!.inputTouches)
+        let touchesConverted = datasetManager.toRawDataArray(coord:drawView!.inputTouches, nbValues:60)
         
         if (circleOrLine.selectedSegmentIndex == 0) {
             self.circlesImages.append(image)
             self.correctArray = circlesImages
-            self.dataset.append((touchesConverted, 0))
+            //self.dataset.append((touchesConverted, 0))
+            
+            datasetManager.appendData(data:touchesConverted,expectedResponse:0)
+            
+            //appenddata à add ici
         } else if (circleOrLine.selectedSegmentIndex == 1) {
             self.linesImages.append(image)
             self.correctArray = linesImages
-            self.dataset.append((touchesConverted, 1))
+            //self.dataset.append((touchesConverted, 1))
+            datasetManager.appendData(data:touchesConverted,expectedResponse:0)
         }
         
         tableView.reloadData()
     }
     
     @IBAction func recongizeClicked(_ sender: Any) {
-
         let touchesConverted = checkDatasType(datasEntryType: datasEntryType, entryTouches: drawView!.inputTouches)
 
         print(perceptron.predict(nbInput: touchesConverted))
@@ -105,47 +110,29 @@ class DrawViewController: UIViewController {
     }
     
     @IBAction func trainClicked(_ sender: Any) {
-        perceptron.train(dataSet: self.dataset, epoch: 6, lr: 0.01)
+        perceptron.train(dataSet: datasetManager.getData(), epoch: 6, lr: 0.01)
     }
     
     func checkDatasType (datasEntryType: String, entryTouches: [CGPoint]) -> [Double] {
-        let data = DataPreparation(array:entryTouches)
-        let formatedData = data.formatArray(n: 60)
-        var dataPrep = DataPreparation(array: formatedData).values
+        var dataPrep = datasetManager.toRawDataArray(coord:entryTouches, nbValues:60)
         
         switch datasEntryType {
         case "normalized":
             print("check normalized")
-            dataPrep = DataPreparation(array: formatedData).normalize()
+            dataPrep = datasetManager.toNormalizedArray(coord:entryTouches, nbValues:60)
             
         case "standardised":
-            dataPrep = DataPreparation(array: formatedData).standardization()
+            dataPrep = datasetManager.toStandardizedArray(coord:entryTouches, nbValues:60)
             print("check standardized")
         default:
-            dataPrep = DataPreparation(array: formatedData).values
+            dataPrep = datasetManager.toRawDataArray(coord:entryTouches, nbValues:60)
         }
         
         print("dataPrep", dataPrep)
         
         return dataPrep
     }
-    
-    
-    private func getCGPointToDouble(pos:[CGPoint]) -> [Double] {
-        var values = [Double]()
-        
-        var coordX = [Double]()
-        var coordY = [Double]()
 
-        coordX = pos.map{Double($0.x)}
-        coordY = pos.map{Double($0.y)}
-
-        values = coordX + coordY
-
-        return values
-    }
-
-    
     
 }
 
